@@ -176,8 +176,8 @@ CREATE TABLE IF NOT EXISTS product_reviews (
 
 CREATE TABLE IF NOT EXISTS order_predictions (
   order_id                    BIGINT PRIMARY KEY REFERENCES orders(order_id),
-  late_delivery_probability   DOUBLE PRECISION NOT NULL,
-  predicted_late_delivery     INTEGER NOT NULL,
+  fraud_probability           DOUBLE PRECISION NOT NULL,
+  predicted_fraud             INTEGER NOT NULL,
   prediction_timestamp        TEXT NOT NULL
 );
 ";

@@ -72,7 +72,7 @@ export default function ScoringPage() {
       ) : null}
 
       <h3>Priority Queue</h3>
-      <p>Queue refreshes when scoring completes.</p>
+      <p>Queue refreshes when fraud scoring completes.</p>
       {warning ? <p>{warning}</p> : null}
       {queueError ? <p className="error">{queueError}</p> : null}
       <table>
@@ -82,8 +82,8 @@ export default function ScoringPage() {
             <th>Customer</th>
             <th>Timestamp</th>
             <th>Total</th>
-            <th>Probability</th>
-            <th>Predicted Late</th>
+            <th>Fraud Probability</th>
+            <th>Predicted Fraud</th>
             <th>Prediction Time</th>
           </tr>
         </thead>
@@ -94,8 +94,8 @@ export default function ScoringPage() {
               <td>{r.customerName}</td>
               <td>{r.orderTimestamp}</td>
               <td>${Number(r.totalValue).toFixed(2)}</td>
-              <td>{(Number(r.lateDeliveryProbability) * 100).toFixed(1)}%</td>
-              <td>{r.predictedLateDelivery ? "Yes" : "No"}</td>
+              <td>{(Number(r.fraudProbability) * 100).toFixed(1)}%</td>
+              <td>{r.predictedFraud ? "Yes" : "No"}</td>
               <td>{r.predictionTimestamp}</td>
             </tr>
           ))}

@@ -5,6 +5,7 @@ import { Customer, shopApi } from "./api";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
 import OrdersPage from "./pages/OrdersPage";
 import ScoringPage from "./pages/ScoringPage";
+import SelectCustomerPage from "./pages/SelectCustomerPage";
 
 export default function App() {
   const [customer, setCustomer] = useState<Customer | null>(null);
@@ -23,8 +24,11 @@ export default function App() {
       <Nav customerLabel={customer ? `${customer.firstName} ${customer.lastName} (${customer.email})` : "None"} />
       <main>
         <Routes>
-          <Route path="/" element={<Navigate to="/place-order" replace />} />
-          <Route path="/select-customer" element={<Navigate to="/place-order" replace />} />
+          <Route path="/" element={<Navigate to="/select-customer" replace />} />
+          <Route
+            path="/select-customer"
+            element={<SelectCustomerPage onSelected={setCustomer} />}
+          />
           <Route
             path="/place-order"
             element={
@@ -38,7 +42,7 @@ export default function App() {
           />
           <Route path="/admin/orders" element={<OrdersPage />} />
           <Route path="/scoring" element={<ScoringPage />} />
-          <Route path="*" element={<Navigate to="/place-order" replace />} />
+          <Route path="*" element={<Navigate to="/select-customer" replace />} />
         </Routes>
       </main>
     </div>

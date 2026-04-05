@@ -384,15 +384,15 @@ public sealed class ShopRepository
               CASE WHEN s.order_id IS NULL THEN 0 ELSE 1 END AS fulfilled,
               c.customer_id,
               c.full_name AS customer_name,
-              p.late_delivery_probability,
-              p.predicted_late_delivery,
+              p.fraud_probability,
+              p.predicted_fraud,
               p.prediction_timestamp
             FROM orders o
             JOIN customers c ON c.customer_id = o.customer_id
             LEFT JOIN shipments s ON s.order_id = o.order_id
             JOIN order_predictions p ON p.order_id = o.order_id
             WHERE s.order_id IS NULL
-            ORDER BY p.late_delivery_probability DESC, o.order_datetime ASC
+            ORDER BY p.fraud_probability DESC, o.order_datetime ASC
             LIMIT 50;";
 
         var rows = new List<PriorityQueueRowDto>();
