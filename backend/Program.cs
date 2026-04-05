@@ -3,21 +3,30 @@ using backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var allowedOrigins = (
-    Environment.GetEnvironmentVariable("ALLOWED_ORIGINS")
-    ?? "http://localhost:5173,http://localhost:3000"
-)
+var allowedOriginsRaw = Environment.GetEnvironmentVariable("ALLOWED_ORIGINS")
+    ?? "http://localhost:5173,http://localhost:3000";
+
+var allowedOrigins = allowedOriginsRaw
     .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+var allowAll = allowedOrigins.Length == 1 && allowedOrigins[0] == "*";
 
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Frontend", policy =>
     {
-        policy.WithOrigins(allowedOrigins)
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
+        if (allowAll)
+        {
+            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        }
+        else
+        {
+            policy.WithOrigins(allowedOrigins)
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        }
     });
 });
 
