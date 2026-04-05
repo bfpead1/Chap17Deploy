@@ -118,8 +118,8 @@ export const shopApi = {
         fulfilled: number;
         customerId: number;
         customerName: string;
-        lateDeliveryProbability: number;
-        predictedLateDelivery: number;
+        fraudProbability: number;
+        predictedFraud: number;
         predictionTimestamp: string;
       }>;
     }>("/api/warehouse/priority"),

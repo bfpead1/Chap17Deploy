@@ -20,8 +20,8 @@ public sealed record PriorityQueueRowDto(
     long Fulfilled,
     long CustomerId,
     string CustomerName,
-    double LateDeliveryProbability,
-    long PredictedLateDelivery,
+    double FraudProbability,
+    long PredictedFraud,
     string PredictionTimestamp);
 public sealed record PriorityQueueResponseDto(List<PriorityQueueRowDto> Rows, string? Warning = null);
 public sealed record SchemaColumnDto(string Name, string Type, bool Nullable, bool PrimaryKey);

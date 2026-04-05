@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 const links = [
+  ["/select-customer", "Select Customer"],
   ["/place-order", "Place Order"],
   ["/admin/orders", "Admin Order History"],
   ["/scoring", "Run Scoring"]

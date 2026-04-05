@@ -18,9 +18,9 @@ export default function PriorityQueuePage() {
 
   return (
     <section>
-      <h2>Late Delivery Priority Queue</h2>
+      <h2>Fraud Review Priority Queue</h2>
       <p>
-        This queue highlights unfulfilled orders with the highest predicted risk of late delivery so operations can prioritize outreach and fulfillment.
+        This queue highlights unfulfilled orders with the highest predicted fraud risk so administrators can review them before fulfillment.
       </p>
       {warning ? <p>{warning}</p> : null}
       {error ? <p className="error">{error}</p> : null}
@@ -31,8 +31,8 @@ export default function PriorityQueuePage() {
             <th>Customer</th>
             <th>Timestamp</th>
             <th>Total</th>
-            <th>Probability</th>
-            <th>Predicted Late</th>
+            <th>Fraud Probability</th>
+            <th>Predicted Fraud</th>
             <th>Prediction Time</th>
           </tr>
         </thead>
@@ -43,8 +43,8 @@ export default function PriorityQueuePage() {
               <td>{r.customerName}</td>
               <td>{r.orderTimestamp}</td>
               <td>${Number(r.totalValue).toFixed(2)}</td>
-              <td>{(Number(r.lateDeliveryProbability) * 100).toFixed(1)}%</td>
-              <td>{r.predictedLateDelivery ? "Yes" : "No"}</td>
+              <td>{(Number(r.fraudProbability) * 100).toFixed(1)}%</td>
+              <td>{r.predictedFraud ? "Yes" : "No"}</td>
               <td>{r.predictionTimestamp}</td>
             </tr>
           ))}

@@ -13,6 +13,13 @@ The app reads/writes:
 
 - `shop.db` at `./shop.db` (only needed for SQLite mode)
 - inference script at: `./jobs/run_inference.py`
+- notebook at: `./Pipeline.ipynb`
+
+## Database Connection Notes
+
+- The ASP.NET backend resolves SQLite from the repo root as `./shop.db` when `SUPABASE_DB_URL` is not set.
+- The Jupyter notebook should also connect to the same repo-root file with `sqlite3.connect('shop.db')`.
+- This keeps the web app and notebook pointed at the same operational database during local development.
 
 ## Backend Setup (.NET)
 
@@ -110,7 +117,7 @@ npm run dev
 - Customer dashboard with stats and recent orders
 - Place order with line items and validation
 - Order history and order detail pages
-- Warehouse late-delivery priority queue (top 50)
+- Fraud review priority queue (top 50 unfulfilled orders)
 - Run scoring button (`python jobs/run_inference.py`) with timeout/stdout/stderr handling
 - Debug schema page (`/debug/schema`) that lists tables + columns
 
@@ -119,11 +126,10 @@ npm run dev
 1. Open `/select-customer` and choose a customer.
 2. Confirm selected customer banner updates.
 3. Place an order at `/place-order`.
-4. Verify success message and new order in `/orders`.
-5. Open order detail and confirm line items.
-6. Run scoring in `/scoring`.
-7. Confirm `/warehouse/priority` shows refreshed prediction rows.
-8. Open `/debug/schema` and verify tables/columns.
+4. Verify success message and new order in `/admin/orders`.
+5. Run scoring in `/scoring`.
+6. Confirm `/api/warehouse/priority` returns refreshed fraud prediction rows.
+7. Open `/debug/schema` and verify tables/columns.
 
 ## API Endpoints (Backend)
 
